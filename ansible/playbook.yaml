@@ -1,0 +1,53 @@
+---
+
+- hosts: all
+  become: true
+  become_method: sudo
+  #vars:
+  #mysql_root_pass: vagrant
+
+  tasks:
+  - name: update the machine
+    apt:
+      update_cache: yes
+
+  - name: upgrade the machine
+    apt:
+      upgrade: full
+      
+  #- name: Set MySQL root password before installing
+  #  debconf: name='mysql-server' question='mysql-server/root_password' value='{{mysql_root_pass | quote}}' vtype='password'
+  #- name: Confirm MySQL root password before installing
+  #  debconf: name='mysql-server' question='mysql-server/root_password_again' value='{{mysql_root_pass | quote}}' vtype='password'
+  #- name: debconf for phpmyadmin
+  #  debconf:
+  #    name: phpmyadmin
+  #    question: "{{ item.question }}"
+  #    value: "{{ item.value }}"
+  #    vtype: "{{ item.vtype }}"
+  #  with_items:
+  #    - { question: 'phpmyadmin/dbconfig-install', value: 'true', vtype: 'boolean' }
+  #    - { question: 'phpmyadmin/app-password-confirm', value: '{{mysql_root_pass}}', vtype: 'password' }
+  #    - { question: 'phpmyadmin/mysql/admin-pass', value: '{{mysql_root_pass}}', vtype: 'password' }
+  #    - { question: 'phpmyadmin/mysql/app-pass', value: '{{mysql_root_pass}}', vtype: 'password' }
+  #    - { question: 'phpmyadmin/reconfigure-webserver', value: 'apache2', vtype: 'multiselect' }
+  #- name: update apt cache
+  #  apt: update_cache=yes
+  #- name: install required packages
+  #  apt: pkg={{ item }} state=latest update_cache=true
+  #  with_items:
+  #    - htop
+  #    - php5
+  #    - php5-cli
+  #    - php5-mysql
+  #    - php5-mcrypt
+  #    - php5-tidy
+  #    - apache2
+  #    - mysql-server
+  #    - phpmyadmin
+  #- name: restart apache
+  #  service:
+  #    name: apache2
+  #    state: restarted
+
+...
